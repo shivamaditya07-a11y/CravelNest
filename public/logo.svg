@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1C29" />
+      <stop offset="50%" stop-color="#0E1017" />
+      <stop offset="100%" stop-color="#07080C" />
+    </linearGradient>
+    <linearGradient id="coralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A" />
+      <stop offset="50%" stop-color="#FF385C" />
+      <stop offset="100%" stop-color="#E01E5A" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#FF7043" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#FF385C" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FFA000" stop-opacity="0.8" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="subtleGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="4" />
+  
+  <!-- Subtle Ambient Glow -->
+  <circle cx="256" cy="220" r="140" fill="url(#coralGrad)" opacity="0.12" filter="url(#glow)" />
+
+  <!-- Monogram Group (CN) -->
+  <g transform="translate(0, -16)" filter="url(#subtleGlow)">
+    <!-- Stylized "C" Arc -->
+    <path d="M 230 148
+             C 140 148, 100 200, 100 266
+             C 100 332, 140 384, 230 384
+             C 264 384, 288 372, 304 356
+             L 282 322
+             C 270 334, 252 344, 230 344
+             C 164 344, 144 298, 144 266
+             C 144 234, 164 188, 230 188
+             C 252 188, 270 198, 282 210
+             L 304 176
+             C 288 160, 264 148, 230 148 Z"
+          fill="url(#coralGrad)" />
+
+    <!-- Stylized "N" Interlocking Structure -->
+    <!-- Left Stem -->
+    <path d="M 252 180 L 292 180 L 292 352 L 252 352 Z" fill="url(#amberGrad)" />
+    <!-- Diagonal -->
+    <path d="M 288 180 L 372 326 L 372 352 L 340 352 L 256 206 L 256 180 Z" fill="url(#coralGrad)" opacity="0.95" />
+    <!-- Right Stem -->
+    <path d="M 368 180 L 408 180 L 408 352 L 368 352 Z" fill="url(#amberGrad)" />
+
+    <!-- Spark / Flavor Accent Star at Top Right -->
+    <polygon points="424,142 430,158 446,164 430,170 424,186 418,170 402,164 418,158" fill="#FFD54F" />
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="256" y="432"
+        text-anchor="middle"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-weight="900"
+        font-size="34"
+        letter-spacing="10"
+        fill="#FFFFFF">CRAVELNEST</text>
+
+  <!-- Tagline Subtext -->
+  <text x="256" y="462"
+        text-anchor="middle"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-weight="600"
+        font-size="12"
+        letter-spacing="5"
+        fill="#FF6B4A">FOOD &amp; QUICK COMMERCE</text>
+</svg>

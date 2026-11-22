@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E202C" />
+      <stop offset="50%" stop-color="#12131C" />
+      <stop offset="100%" stop-color="#0A0B10" />
+    </linearGradient>
+    <linearGradient id="coralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A" />
+      <stop offset="50%" stop-color="#FF385C" />
+      <stop offset="100%" stop-color="#E01E5A" />
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#FF7043" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#FF385C" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#FFA000" stop-opacity="0.8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="8" y="8" width="184" height="184" rx="46" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="2.5" />
+  
+  <!-- Monogram Group (CN) perfectly centered -->
+  <g transform="translate(-18, -24) scale(0.64)">
+    <!-- Stylized "C" Arc -->
+    <path d="M 230 148
+             C 140 148, 100 200, 100 266
+             C 100 332, 140 384, 230 384
+             C 264 384, 288 372, 304 356
+             L 282 322
+             C 270 334, 252 344, 230 344
+             C 164 344, 144 298, 144 266
+             C 144 234, 164 188, 230 188
+             C 252 188, 270 198, 282 210
+             L 304 176
+             C 288 160, 264 148, 230 148 Z"
+          fill="url(#coralGrad)" />
+
+    <!-- Stylized "N" Interlocking Structure -->
+    <path d="M 252 180 L 292 180 L 292 352 L 252 352 Z" fill="url(#amberGrad)" />
+    <path d="M 288 180 L 372 326 L 372 352 L 340 352 L 256 206 L 256 180 Z" fill="url(#coralGrad)" opacity="0.95" />
+    <path d="M 368 180 L 408 180 L 408 352 L 368 352 Z" fill="url(#amberGrad)" />
+
+    <!-- Spark / Flavor Accent Star -->
+    <polygon points="424,142 430,158 446,164 430,170 424,186 418,170 402,164 418,158" fill="#FFD54F" />
+  </g>
+</svg>

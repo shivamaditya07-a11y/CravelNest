@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1C29" />
+      <stop offset="100%" stop-color="#07080C" />
+    </linearGradient>
+    <linearGradient id="favCoral" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A" />
+      <stop offset="100%" stop-color="#FF385C" />
+    </linearGradient>
+    <linearGradient id="favAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300" />
+      <stop offset="100%" stop-color="#FF7043" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#favBg)" stroke="#FF5722" stroke-width="1.5" />
+  <!-- Monogram CN -->
+  <path d="M 28 18 C 18 18 13 24 13 32 C 13 40 18 46 28 46 C 32 46 35 44 37 42 L 35 38 C 33 40 31 41 28 41 C 21 41 18 36 18 32 C 18 28 21 23 28 23 C 31 23 33 24 35 26 L 37 22 C 35 20 32 18 28 18 Z" fill="url(#favCoral)" />
+  <path d="M 31 22 L 36 22 L 36 43 L 31 43 Z" fill="url(#favAmber)" />
+  <path d="M 35 22 L 46 39 L 46 43 L 42 43 L 31 26 L 31 22 Z" fill="url(#favCoral)" opacity="0.95" />
+  <path d="M 45 22 L 50 22 L 50 43 L 45 43 Z" fill="url(#favAmber)" />
+  <circle cx="52" cy="18" r="2.5" fill="#FFD54F" />
+</svg>

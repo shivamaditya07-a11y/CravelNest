@@ -1,0 +1,17 @@
+{
+  "short_name": "CravelNest",
+  "name": "CravelNest - Food & Quick Commerce",
+  "description": "Indore & Gwalior's finest food discovery and quick commerce delivery service.",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#FF4B2B",
+  "background_color": "#ffffff"
+}
