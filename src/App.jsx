@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-import { Search, Sparkles, Tag, ShoppingCart, Star, Clock, MapPin, Plus, ArrowLeft, Heart, ChevronDown, CheckCircle, Share2, Gift, User, ShieldCheck, X, Copy, Coffee, Pizza, IceCream, Beef, CloudRain, Sun, Home as HomeIcon } from 'lucide-react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { Search, Sparkles, Tag, ShoppingCart, Star, Clock, MapPin, Plus, ArrowLeft, ArrowRight, Heart, ChevronDown, CheckCircle, Share2, Gift, User, ShieldCheck, X, Copy, Coffee, Pizza, IceCream, Beef, CloudRain, Sun, Home as HomeIcon, Zap, Utensils, Award, Truck, Flame, Leaf } from 'lucide-react';
 import './index.css';
 
 const GWALIOR_RESTAURANTS = [
@@ -77,13 +77,50 @@ function GenericPage({ title, description }) {
   );
 }
 
+
+const LIVE_NOTIFICATIONS = [
+  { name: 'Pooja S.', loc: 'City Centre', item: 'Paneer Butter Masala', time: 'Just now' },
+  { name: 'Rahul M.', loc: 'Naya Bazaar', item: '2x Khasta Kachori', time: '1m ago' },
+  { name: 'Dr. Verma', loc: 'DB Mall Area', item: 'Masala Dosa Platter', time: '2m ago' },
+  { name: 'Ankit T.', loc: 'Lashkar', item: 'Deluxe Special Thali', time: '3m ago' },
+  { name: 'Simran K.', loc: 'Phoolbagh', item: 'Butter Chicken & Naan', time: 'Just now' }
+];
+
 // --- Layout ---
 function Layout({ children, cartItems, orderPlaced }) {
   const [showAuth, setShowAuth] = useState(false);
+  const [tickerIdx, setTickerIdx] = useState(0);
+  const [tickerVisible, setTickerVisible] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTickerIdx(prev => (prev + 1) % LIVE_NOTIFICATIONS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const totalCartAmount = cartItems.reduce((s, i) => s + i.price, 0);
 
   return (
     <div className="page-container">
+      {/* Top Live Announcement Bar */}
+      <div className="top-banner">
+        <div className="top-banner-inner">
+          <span className="live-pulse-badge">
+            <span className="live-pulse-dot"></span> LIVE IN GWALIOR & INDORE
+          </span>
+          <span className="top-banner-text">
+            ⚡ Use code <strong>CRAVELNEST150</strong> for Flat ₹150 OFF • 100% Contactless Delivery
+          </span>
+          <span className="top-banner-stat">
+            <Zap size={13} fill="#FFA000" color="#FFA000" /> Avg Delivery: <strong>21 Mins</strong>
+          </span>
+        </div>
+      </div>
+
       <header className="header">
+
         <div style={{display: 'flex', alignItems: 'center'}}>
           <a href="/" className="logo-section" style={{textDecoration: 'none'}}>
             <img src="/logo-mark.svg" alt="CravelNest Logo" className="logo-img" />
@@ -116,6 +153,49 @@ function Layout({ children, cartItems, orderPlaced }) {
       </header>
       
       {children}
+
+      {/* Floating Cart Bar (Appears when cart has items) */}
+      {cartItems.length > 0 && location.pathname !== '/cart' && (
+        <Link to="/cart" className="floating-cart-bar animate-fade-in">
+          <div className="floating-cart-left">
+            <div className="floating-cart-icon">
+              <ShoppingCart size={18} />
+              <span className="floating-cart-badge">{cartItems.length}</span>
+            </div>
+            <div>
+              <div className="floating-cart-title">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in cart</div>
+              <div className="floating-cart-price">₹{totalCartAmount}</div>
+            </div>
+          </div>
+          <div className="floating-cart-btn">
+            <span>View Cart</span>
+            <ArrowRight size={16} />
+          </div>
+        </Link>
+      )}
+
+      {/* Real-time Order Pulse Ticker */}
+      {tickerVisible && (
+        <div className="live-order-ticker animate-fade-in">
+          <div className="ticker-pulse"></div>
+          <div className="ticker-body">
+            <div className="ticker-header">
+              <span className="ticker-name">{LIVE_NOTIFICATIONS[tickerIdx].name}</span> in <span className="ticker-loc">{LIVE_NOTIFICATIONS[tickerIdx].loc}</span>
+            </div>
+            <div className="ticker-item">ordered <strong>{LIVE_NOTIFICATIONS[tickerIdx].item}</strong> • <span className="ticker-time">{LIVE_NOTIFICATIONS[tickerIdx].time}</span></div>
+          </div>
+          <button className="ticker-close" onClick={() => setTickerVisible(false)} title="Dismiss">
+            <X size={12} />
+          </button>
+        </div>
+      )}
+
+      {/* Trust & Guarantee Strip */}
+      <div className="trust-strip">
+        <div className="trust-item"><ShieldCheck size={20} color="var(--primary)" /> <span>FSSAI Certified Hygiene</span></div>
+        <div className="trust-item"><Truck size={20} color="var(--primary)" /> <span>21-Min Express Delivery</span></div>
+        <div className="trust-item"><Award size={20} color="var(--primary)" /> <span>100% Quality & Taste Guarantee</span></div>
+      </div>
 
       {/* Footer */}
       <footer className="footer">
@@ -158,6 +238,24 @@ function Home({ addToCart }) {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('All');
   const [weather, setWeather] = useState(null);
+  const [activeMode, setActiveMode] = useState('food');
+  
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cravelnest_favorites');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const toggleFavorite = (id) => {
+    setFavorites(prev => {
+      const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
+      try { localStorage.setItem('cravelnest_favorites', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  };
   
   const HERO_IMAGES = [
     "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80", // Pizza
@@ -191,8 +289,20 @@ function Home({ addToCart }) {
 
   const filteredRestaurants = GWALIOR_RESTAURANTS.filter(r => {
     const matchesSearch = r.name.toLowerCase().includes(search.toLowerCase()) || r.cuisine.toLowerCase().includes(search.toLowerCase());
-    const matchesFilter = filter === 'All' ? true : r.rating >= 4.5;
-    return matchesSearch && matchesFilter;
+    if (!matchesSearch) return false;
+    
+    if (activeMode === 'instadrop') {
+      const isQuick = r.time.includes('15') || r.time.includes('20') || r.cuisine.includes('Bakery') || r.cuisine.includes('Street');
+      if (!isQuick) return false;
+    }
+    
+    if (filter === 'All') return true;
+    if (filter === 'Veg') return r.cuisine.toLowerCase().includes('pure veg') || r.cuisine.toLowerCase().includes('jain') || r.name.toLowerCase().includes('panchvati') || r.name.toLowerCase().includes('param') || r.name.toLowerCase().includes('jain');
+    if (filter === 'Rating 4.4+') return r.rating >= 4.4;
+    if (filter === 'Fast') return r.time.includes('15') || r.time.includes('20');
+    if (filter === 'Offers') return r.offer && r.offer !== 'No Offers';
+    if (filter === 'Favorites') return favorites.includes(r.id);
+    return true;
   });
 
   const foodSearchResults = search.trim() ? GWALIOR_RESTAURANTS.flatMap(r => 
@@ -219,6 +329,22 @@ function Home({ addToCart }) {
           <h1>Aaj kya khaoge?<br/>Scene hum set karenge.</h1>
           <p>From craving to checkout—Gwalior's finest restaurants, exclusive deals, and lightning-fast delivery.</p>
           
+          {/* Delivery Mode Toggle Pills */}
+          <div className="delivery-mode-switcher">
+            <button 
+              className={`mode-btn ${activeMode === 'food' ? 'active' : ''}`}
+              onClick={() => setActiveMode('food')}
+            >
+              <Utensils size={15} /> 🍽️ Food Delivery (20–30m)
+            </button>
+            <button 
+              className={`mode-btn ${activeMode === 'instadrop' ? 'active' : ''}`}
+              onClick={() => setActiveMode('instadrop')}
+            >
+              <Zap size={15} /> ⚡ Instadrop QuickMart (10–15m)
+            </button>
+          </div>
+
           <div className="hero-search">
             <div className="hero-search-wrapper">
               <Search size={20} />
@@ -303,10 +429,12 @@ function Home({ addToCart }) {
         <div className="section-header">
           <h2 className="section-title">Restaurants with online food delivery in Gwalior</h2>
           <div className="filters-bar" style={{marginTop: '1.5rem'}}>
-            <button className={`filter-btn ${filter === 'All' ? 'active' : ''}`} onClick={() => setFilter('All')}>All Restaurants</button>
-            <button className={`filter-btn ${filter === 'Rating 4.5+' ? 'active' : ''}`} onClick={() => setFilter('Rating 4.5+')}>Rating 4.5+</button>
-            <button className="filter-btn">Pure Veg</button>
-            <button className="filter-btn">Offers</button>
+            <button className={`filter-btn ${filter === 'All' ? 'active' : ''}`} onClick={() => setFilter('All')}>All Places ({GWALIOR_RESTAURANTS.length})</button>
+            <button className={`filter-btn ${filter === 'Veg' ? 'active' : ''}`} onClick={() => setFilter('Veg')}>🌱 Pure Veg</button>
+            <button className={`filter-btn ${filter === 'Rating 4.4+' ? 'active' : ''}`} onClick={() => setFilter('Rating 4.4+')}>⭐ Top Rated (4.4+)</button>
+            <button className={`filter-btn ${filter === 'Fast' ? 'active' : ''}`} onClick={() => setFilter('Fast')}>⚡ Fast (&lt; 25 min)</button>
+            <button className={`filter-btn ${filter === 'Offers' ? 'active' : ''}`} onClick={() => setFilter('Offers')}>🏷️ Great Offers</button>
+            <button className={`filter-btn ${filter === 'Favorites' ? 'active' : ''}`} onClick={() => setFilter('Favorites')}>❤️ Saved ({favorites.length})</button>
           </div>
         </div>
 
@@ -322,6 +450,21 @@ function Home({ addToCart }) {
                 <div className="card-image-container">
                   <img src={restaurant.image} alt={restaurant.name} className="card-image" onError={(e) => { e.target.onerror = null; e.target.src = "/thali.jpg"; }} />
                   <div className="card-offer">{restaurant.offer}</div>
+                  {restaurant.rating >= 4.5 && (
+                    <div className="bestseller-tag">
+                      <Flame size={12} fill="#FFA000" color="#FFA000" /> TRENDING
+                    </div>
+                  )}
+                  <button 
+                    className={`card-heart-btn ${favorites.includes(restaurant.id) ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(restaurant.id);
+                    }}
+                    title="Save to favorites"
+                  >
+                    <Heart size={16} fill={favorites.includes(restaurant.id) ? '#FF4B2B' : 'none'} color={favorites.includes(restaurant.id) ? '#FF4B2B' : 'white'} />
+                  </button>
                 </div>
                 <div className="card-content">
                   <div className="card-title-row">
