@@ -1,16 +1,45 @@
-# React + Vite
+# CravelNest 🍽️🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **CRAVE IT. NEST IT. TASTE THE BEST.**
+> *An Initiative by Aditya Shivam's World*
 
-Currently, two official plugins are available:
+CravelNest is a modern, high-conversion **Hyperlocal Food Delivery & Quick Commerce** web platform built for fast, intuitive ordering across local restaurants, street food hubs, and daily essentials.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Key Features
+- **⚡ Lightning-Fast Food Discovery:** Search by dish (e.g., kachori, poha, biryani) or restaurant with sub-second client-side filtering.
+- **🤖 AI Curated Picks:** Personalized suggestions based on local trending preferences and current weather conditions.
+- **📍 Real-Time Location Selector:** Built for Gwalior & Indore hyperlocal fulfillment hubs.
+- **🛍️ Seamless Cart & Order Tracking:** Dynamic cart management with interactive tracking simulations.
+- **🎨 Modern Visual Design:** Custom "CN" flame monogram identity, vibrant food coral/amber palette, and glassmorphic UI components.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠️ Tech Stack
+- **Frontend Framework:** React 19 + Vite
+- **Styling:** Modern CSS3 Variables & Responsive Flex/Grid Layouts
+- **Icons:** Lucide React
+- **Routing:** React Router v7 (SPA with Netlify rewrite rules)
+- **Deployment:** Netlify Static Edge Hosting
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+
+## 🚀 Getting Started Locally
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Start the local development server
+npm run dev
+
+# 3. Build for production
+npm run build
+```
+
+---
+
+## 📄 License & Attribution
+© 2026 **CravelNest Technologies Pvt. Ltd.** All Rights Reserved.  
+*Architected & Created by Shivam Aditya.*

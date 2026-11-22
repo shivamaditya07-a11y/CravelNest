@@ -207,7 +207,7 @@ function Home({ addToCart }) {
         <div className="hero-content animate-fade-in delay-1">
           <div className="hero-badges">
             <div className="badge">
-              <Heart size={14} fill="currentColor" /> DIL BOLE, CRAVELNEST
+              <Heart size={14} fill="currentColor" /> CRAVE IT. NEST IT. TASTE THE BEST.
             </div>
             {weather && (
               <div className="badge" style={{textTransform: 'none', letterSpacing: 'normal'}}>
